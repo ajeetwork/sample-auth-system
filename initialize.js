@@ -11,3 +11,8 @@ mongoose.connect(MONGO_URL, {
   if (!err) console.info('successfully connected to database');
   else console.error(err);
 });
+
+const { ASSETS_PATH = __dirname } = process.env;
+module.exports = {
+  ASSETS_PATH,
+};

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const { transformMongooseToJSON } = require('./../helpers/transformMongooseToJSON');
+const { omit } = require('lodash');
 
 const { Schema } = mongoose;
 
@@ -20,7 +20,11 @@ const statusSchema = new Schema({
 }, {
   toJSON: {
     hidden: ['__v', '_id'],
-    transform: transformMongooseToJSON,
+    transform: (doc, ret, options) => {
+      const result = omit(ret, options.hidden);
+      result.id = ret._id;
+      return result;
+    },
   },
 });
 

@@ -2,9 +2,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const validator = require('validator');
 const phone = require('phone');
-const { isEmpty } = require('lodash');
-const transformMongooseToJSON = require('./../helpers/transformMongooseToJSON');
-const { signToken } = require('./../helpers/jwt');
+const { isEmpty, omit } = require('lodash');
+const { signToken } = require('../helpers/jwt');
 
 const { Schema } = mongoose;
 
@@ -84,8 +83,12 @@ const userSchema = new Schema({
   },
 }, {
   toJSON: {
-    hidden: ['password', '__v', '_id', 'createdAt'],
-    transform: transformMongooseToJSON,
+    hidden: ['password', '__v', '_id', 'tokens', 'createdAt'],
+    transform: (doc, ret, options) => {
+      const result = omit(ret, options.hidden);
+      result.id = ret._id;
+      return result;
+    },
   },
 });
 

@@ -12,6 +12,12 @@ https://sample-auth-system.herokuapp.com
 - MONGO_URL: MongoDB url
 - JWT_SECRET: JWT secret
 
+## End points
+
+- POST `/api/user`: create user
+- POST `/api/user/auth`: login
+- POST `/api/status`: create status for authenticated users
+
 ## development
 
 ```

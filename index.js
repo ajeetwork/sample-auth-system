@@ -1,23 +1,24 @@
 require('dotenv').config();
+require('./initialize');
 const express = require('express');
 require('express-async-errors');
 const CustomError = require('./helpers/customError');
 const { errorHandler } = require('./middlewares');
 const userRouter = require('./routers/user');
 const statusRouter = require('./routers/status');
-require('./db');
 
 const app = express();
 
 
+app.use('/uploads', express.static('uploads'));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-
-app.get('/api', (req, res) => res.send());
 app.use('/api/user', userRouter);
 app.use('/api/status', statusRouter);
 
+app.get('/', (req, res) => res.send({ started: true }));
 
 app.use((req, res, next) => { next(new CustomError(404, 'ROUTE_NOT_FOUND')); });
 app.use(errorHandler);
