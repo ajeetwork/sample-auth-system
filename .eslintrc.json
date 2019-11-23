@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "airbnb-base"
+  ],
+  "env": {
+    "node": 1,
+    "mocha": 1
+  },
+  "rules": {
+    "no-console": ["error",{"allow": ["info", "warn", "error"]}],
+    "consistent-return": ["warn"],
+    "no-underscore-dangle": "off",
+    "no-unused-vars": ["error",{"args": "none"}],
+    "camelcase": "warn"
+  }
+}

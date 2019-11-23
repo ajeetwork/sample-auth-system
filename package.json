@@ -1,0 +1,51 @@
+{
+  "name": "sample-auth-system",
+  "version": "1.0.0",
+  "description": "sample auth system",
+  "main": "index.js",
+  "repository": "git@github.com:MohammedEssehemy/sample-auth-system.git",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon --inspect index.js",
+    "pretest": "docker-compose -f testing.docker-compose.yml -p testing_sample_auth_system up --build -d",
+    "test": "mocha --exit \"test/**/*.js\"",
+    "posttest": "docker-compose -f testing.docker-compose.yml -p testing_sample_auth_system down -v",
+    "test:watch": "nodemon --exec npm test"
+  },
+  "author": "Mohammed Essehemy <mohammedessehemy@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^3.0.7",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.7.12",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.2",
+    "phone": "^2.4.2",
+    "validator": "^12.1.0",
+    "yup": "^0.27.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.4.3",
+    "mocha": "^6.2.2",
+    "nodemon": "^2.0.1",
+    "supertest": "^4.0.2"
+  }
+}
